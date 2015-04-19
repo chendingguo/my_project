@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.riseup.persistence.HostMapper">
+
+
+
+	<select id="selectHost" parameterType="Host" resultType="Host">
+		SELECT
+		host_ip AS hostIp,
+		host_name AS hostName,
+		host_desc AS hostDesc
+		FROM host
+		<where>
+
+			<if test="hostIp !=null ">
+				AND host_ip = #{hostIp}
+			</if>
+
+			<if test="hostName != null">
+				AND host_name = #{hostName}
+			</if>
+
+		</where>
+
+	</select>
+
+
+	<insert id="insertHost" parameterType="Host">
+		INSERT INTO host
+		(host_ip,
+		host_name,
+		host_desc)
+		VALUES (
+		#{hostIp},
+		#{hostName},
+		#{hostDesc})
+	</insert>
+
+
+	<delete id="deleteHost" parameterType="Host">
+		DELETE
+
+		FROM host
+		<where>
+
+			<if test="hostIp !=null ">
+				AND host_ip = #{hostIp}
+			</if>
+
+			<if test="hostName != null">
+				AND host_name = #{hostName}
+			</if>
+
+		</where>
+
+	</delete>
+
+
+	<update id="updateHost" parameterType="Host">
+		UPDATE
+		host
+		SET host_name =#{hostName},host_desc =#{hostDesc}
+		WHERE host_ip = #{hostIp}
+
+	</update>
+
+
+</mapper>
