@@ -14,7 +14,7 @@ xmlns:tx="http://www.springframework.org/schema/tx"
 
 <!-- enable component scanning (beware that this does not enable mapper 
 		scanning!) -->
-	<context:component-scan base-package="com.riseup.controller" />
+	<context:component-scan base-package="com.riseup.*.controller" />
 	
 	<mvc:annotation-driven />
 	

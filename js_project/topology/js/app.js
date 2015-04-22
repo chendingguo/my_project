@@ -1,0 +1,1 @@
+var canvas_app='/canvas/ctrl';
