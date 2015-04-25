@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<description>mondrian-server</description>
+
+
+	<!-- xmla Servlet -->
+	<servlet>
+		<servlet-name>MondrianXmlaServlet</servlet-name>
+		<servlet-class>mondrian.xmla.impl.DynamicDatasourceXmlaServlet</servlet-class>
+		
+		<!-- This is an example of how to add a callback to the XML/A servlet. 
+			It must implement mondrian.xmla.XmlaRequestCallback. <init-param> <param-name>Callbacks</param-name> 
+			<param-value>com.example.MyCallbackClass;com.example.SomeOtherCallback</param-value> 
+			</init-param> -->
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MondrianXmlaServlet</servlet-name>
+		<url-pattern>/xmla</url-pattern>
+	</servlet-mapping>
+
+
+	
+	<!-- Welcome files -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

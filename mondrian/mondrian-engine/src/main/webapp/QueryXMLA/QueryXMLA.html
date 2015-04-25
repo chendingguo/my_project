@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>XMLA Query</title>
+	<link rel="stylesheet" type="text/css" href="QueryXMLA.css" />
+	<script src="jquery-1.7.2.js"></script>
+	<script src="XMLAResponse.js"></script>
+	<script src="QueryXMLA.js"></script>
+</head>
+
+<body>
+	<h1>Query Mondrian with XMLA</h1>
+	<form id="queryForm">
+		<input type="text" name="serverURL" placeholder="" size="60" value="http://localhost:8080/mondrian-engine/xmla"></input>
+		<input type="text" name="userId" placeholder="Enter user ID" size="20" />
+		<input type="password" name="password" placeholder="Enter password" size="20" />
+		<br />
+		<input type="button" name="discoverButton" value="Discover Datasources" />
+		Available Datasources:
+		<select id="datasourcesSelect"></select>
+		Available Catalogs:
+		<select id="catalogSelect"></select>
+		<br />
+		<textarea type="textarea" name="mdxQuery" rows="20" cols="80" placeholder="Enter MDX Query..."></textarea>
+		<br/>
+		<input type="button" name="queryButton" value="Query" />
+	</form>
+	<div>
+		<table id="results">
+			<tbody></tbody>
+		</table>
+	</div>
+	<div id="errors"></div>
+	
+</body>
+
+</html>
