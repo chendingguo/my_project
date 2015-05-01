@@ -141,7 +141,7 @@ public class XmlaHandler {
 		if (request.getPassword() != null) {
 			props.put(JDBC_PASSWORD, request.getPassword());
 		}
-		// TODO:change the name to .get("DataSourceName")
+		// TODO:MODIFY change the name to .get("DataSourceName")
 		// databaseName不能为空
 		final String databaseName = request.getProperties().get(
 				PropertyDefinition.DataSourceInfo.name());
