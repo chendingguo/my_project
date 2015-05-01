@@ -1,0 +1,77 @@
+1.discovery the datasources:
+  <Discover xmlns="urn:schemas-microsoft-com:xml-analysis">\
+  <RequestType>DISCOVER_DATASOURCES</RequestType>\
+  <Restrictions>\
+    <RestrictionList/>\
+  </Restrictions>\
+  <Properties>\
+    <PropertyList>\
+      <Format>Tabular</Format>\
+    </PropertyList>\
+  </Properties>\
+</Discover>'
+
+2.discovery the catalogs
+
+'<Discover xmlns="urn:schemas-microsoft-com:xml-analysis">\
+   <RequestType>DBSCHEMA_CATALOGS</RequestType>\
+   <Restrictions />\
+   <Properties />\
+</Discover>'
+
+3.discovery the cubes
+
+'<Discover xmlns="urn:schemas-microsoft-com:xml-analysis">\
+   <RequestType>MDSCHEMA_CUBES</RequestType>\
+   <Restrictions>\
+      <RestrictionList>\
+         <CATALOG_NAME>xxxCATALOGxxx</CATALOG_NAME>\
+      </RestrictionList>\
+   </Restrictions>\
+   <Properties>\
+      <PropertyList>\
+         <DataSourceInfo>xxxDATA_SOURCE_INFOxxx</DataSourceInfo>\
+         <Catalog>xxxCATALOGxxx</Catalog>\
+         <Format>Tabular</Format>\
+      </PropertyList>\
+   </Properties>\
+</Discover>'
+
+4 discovery dimensions 
+
+'<Discover xmlns="urn:schemas-microsoft-com:xml-analysis">\
+   <RequestType>MDSCHEMA_DIMENSIONS</RequestType>\
+   <Restrictions>\
+      <RestrictionList>\
+         <CATALOG_NAME>xxxCATALOGxxx</CATALOG_NAME>\
+      </RestrictionList>\
+   </Restrictions>\
+   <Properties>\
+      <PropertyList>\
+         <DataSourceInfo>xxxDATA_SOURCE_INFOxxx</DataSourceInfo>\
+         <Catalog>xxxCATALOGxxx</Catalog>\
+         <Format>Tabular</Format>\
+      </PropertyList>\
+   </Properties>\
+</Discover>';
+
+5 discovery measurces
+
+'<Discover xmlns="urn:schemas-microsoft-com:xml-analysis">\
+   <RequestType>MDSCHEMA_MEASURES</RequestType>\
+   <Restrictions>\
+      <RestrictionList>\
+         <CATALOG_NAME>xxxCATALOGxxx</CATALOG_NAME>\
+      </RestrictionList>\
+   </Restrictions>\
+   <Properties>\
+      <PropertyList>\
+         <DataSourceInfo>xxxDATA_SOURCE_INFOxxx</DataSourceInfo>\
+         <Catalog>xxxCATALOGxxx</Catalog>\
+         <Format>Tabular</Format>\
+      </PropertyList>\
+   </Properties>\
+</Discover>';
+
+
+
