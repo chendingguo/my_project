@@ -253,6 +253,7 @@ public class FileRepository implements Repository {
 							.getDataSource(xmlCatalog.dataSourceInfo);
 				
 					 String connectString = xmlCatalog.dataSourceInfo ;
+					//TODO:[NOTE]
 					if(null!=connectString){
 						connectString=createConnectionString(dataSource);
 					}else{
