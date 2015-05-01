@@ -9,7 +9,7 @@
 		</DataSourceDescription>
 		<URL>http://localhost:8080/mondrian-engine/xmla</URL>
 		<DataSourceInfo>
-
+             Provider=Mondrian;DataSource=MondrianDataSource;
 		</DataSourceInfo>
 		<ProviderName>Mondrian</ProviderName>
 		<ProviderType>MDP</ProviderType>
