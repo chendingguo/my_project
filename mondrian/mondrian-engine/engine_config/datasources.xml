@@ -5,17 +5,25 @@
 			Provider=Mondrian;DataSource=MondrianDataSource;
 		</DataSourceName>
 		<DataSourceDescription>
-			long credit olap datasource
+			long credit datasource
 		</DataSourceDescription>
 		<URL>http://localhost:8080/mondrian-engine/xmla</URL>
 		<DataSourceInfo>
+
 		</DataSourceInfo>
 		<ProviderName>Mondrian</ProviderName>
 		<ProviderType>MDP</ProviderType>
 		<AuthenticationMode>Unauthenticated</AuthenticationMode>
 		<Catalogs>
-			
-		
+			<Catalog name="FoodMart">
+
+				<DataSourceInfo>
+					foodmart
+				</DataSourceInfo>
+				<Definition>D:/olapworkspace/mondrian-engine/engine_config/FoodMart.xml
+				</Definition>
+			</Catalog>
+
 			<Catalog name="SteelWheels">
 				<DataSourceInfo>
 					steelwheels
