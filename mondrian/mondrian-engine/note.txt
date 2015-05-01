@@ -74,4 +74,9 @@
 </Discover>';
 
 
+2015 05 01 
+1. get the datasource info from DataSource instance
+2. datasources.xml covert to DataSourcesConfig class
+3. resole the dialect class bug
+
 
