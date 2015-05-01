@@ -1,11 +1,20 @@
 package com.airsupply.olap.vo;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.StringWriter;
 import java.util.List;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -133,6 +142,28 @@ public class DataSourcesConfig {
 
 	}
 
+	/**
+	 * 将文档输出到文件保存，可指定格式化输出,可指定字符编码。
+	 * 
+	 * @param document
+	 * @param outputFile
+	 */
+	public static void saveDocument(Document doc, String outputPath) {
+		// 输出文件
+		File outputFile = new File(outputPath);
+		try {
+			// 美化格式
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			// 指定XML编码,不指定的话，默认为UTF-8
+			format.setEncoding("UTF-8");
+			XMLWriter output = new XMLWriter(new FileWriter(outputFile), format);
+			output.write(doc);
+			output.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 	public static void main(String[] args) {
 		InputStream input;
 		try {
@@ -146,19 +177,29 @@ public class DataSourcesConfig {
 			DataSourcesConfig config = (DataSourcesConfig) xStream
 					.fromXML(input);
 			System.out.println(xStream.toXML(config));
+
+			// test delete catalog
 			
-			
-			//test delete catalog
-			System.out.println("---------------test delete catalog-----------------");
-			DataSourcesConfig config1=config;
+			DataSourcesConfig config1 = config;
 			config1.removeCatalogs("SteelWheels");
-			System.out.println(xStream.toXML(config1));
-			OutputStream out=new FileOutputStream("d:/test.xml");
-			xStream.toXML(config1, out);
+
+			//operate xml use dom4j
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			format.setEncoding("utf-8");
+			StringWriter sw = new StringWriter();
+			try {
+				Document doc = DocumentHelper.parseText(xStream.toXML(config1));
+				saveDocument(doc, "d:/test.xml");
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
+
 }
