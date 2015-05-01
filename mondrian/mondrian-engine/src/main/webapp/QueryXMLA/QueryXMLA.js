@@ -188,7 +188,7 @@ function handleDiscoverCube(cubeData, textStatus, jqXHR) {
 
 // <start id="discover_cubes_query"/>
 var discoverCubesQuery = '<Discover xmlns="urn:schemas-microsoft-com:xml-analysis">\
-   <RequestType>MDSCHEMA_CUBES</RequestType>\
+   <RequestType>MDSCHEMA_MEASURES</RequestType>\
    <Restrictions>\
       <RestrictionList>\
          <CATALOG_NAME>xxxCATALOGxxx</CATALOG_NAME>\
