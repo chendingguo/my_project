@@ -11,6 +11,7 @@
 package mondrian.rolap;
 
 import mondrian.olap.*;
+import mondrian.olap.Util.PropertyList;
 import mondrian.olap.fun.*;
 import mondrian.olap.type.*;
 import mondrian.resource.MondrianResource;
@@ -25,10 +26,8 @@ import mondrian.util.ClassResolver;
 
 import org.apache.commons.vfs.FileSystemException;
 import org.apache.log4j.Logger;
-
 import org.eigenbase.xom.*;
 import org.eigenbase.xom.Parser;
-
 import org.olap4j.impl.Olap4jUtil;
 import org.olap4j.mdx.IdentifierSegment;
 
@@ -553,8 +552,19 @@ public class RolapSchema implements Schema {
      * @return dialect
      */
     public Dialect getDialect() {
-        DataSource dataSource = getInternalConnection().getDataSource();
-        return DialectManager.createDialect(dataSource, null);
+    	//TODO:[NOTE]2015/05/01
+    	//get the datasource info   choose the dialect class
+    	String dialectClassName="";
+    	internalConnection=getInternalConnection();
+    	PropertyList properties=internalConnection.getConnectInfo();
+    	String jdbcDrivers=properties.get("JdbcDrivers");
+    	if("com.mysql.jdbc.Driver".equals(jdbcDrivers)){
+    		dialectClassName="mondrian.spi.impl.MySqlDialect";
+    	}else if("oracle.jdbc.driver.OracleDriver".equals(jdbcDrivers)){
+    		dialectClassName="mondrian.spi.impl.OracleDialect";
+    	}
+        DataSource dataSource = internalConnection.getDataSource();
+        return DialectManager.createDialect(dataSource, null,dialectClassName);
     }
 
     private void load(MondrianDef.Schema xmlSchema) {

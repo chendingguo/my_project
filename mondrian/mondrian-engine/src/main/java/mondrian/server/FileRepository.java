@@ -17,13 +17,18 @@ import mondrian.tui.XmlaSupport;
 import mondrian.util.*;
 import mondrian.xmla.DataSourcesConfig;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 import org.olap4j.*;
 import org.olap4j.impl.Olap4jUtil;
 
+import com.airsupply.olap.service.MockDataSourceService;
+
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.*;
+
+import javax.sql.DataSource;
 
 /**
  * Implementation of {@link mondrian.server.Repository} that reads
@@ -238,10 +243,21 @@ public class FileRepository implements Repository {
                             "more than one DataSource object has name '"
                             + xmlCatalog.name + "'");
                     }
-                    String connectString =
-                        xmlCatalog.dataSourceInfo != null
-                            ? xmlCatalog.dataSourceInfo
-                            : xmlDataSource.dataSourceInfo;
+//                    String connectString =
+//                        xmlCatalog.dataSourceInfo != null
+//                            ? xmlCatalog.dataSourceInfo
+//                            : xmlDataSource.dataSourceInfo;
+                    
+                	// read the datasource info from DataSource object
+					DataSource dataSource = MockDataSourceService
+							.getDataSource(xmlCatalog.dataSourceInfo);
+				
+					 String connectString = xmlCatalog.dataSourceInfo ;
+					if(null!=connectString){
+						connectString=createConnectionString(dataSource);
+					}else{
+						connectString= xmlDataSource.dataSourceInfo;
+					}
                     // Check if the catalog is part of the connect
                     // string. If not, add it.
                     final Util.PropertyList connectProperties =
@@ -371,6 +387,29 @@ public class FileRepository implements Repository {
     RepositoryContentFinder getRepositoryContentFinder() {
         return repositoryContentFinder;
     }
+    
+    
+    /**
+     * TODO:[NOTE]
+	 * generate the Catalog/DataSourceInfo node content
+	 * @param dataSource
+	 * @return
+	 */
+	public String createConnectionString(DataSource ds) {
+        BasicDataSource dataSource=(BasicDataSource)ds;
+		StringBuilder connStrBuilder = new StringBuilder();
+		String jdbc = dataSource.getUrl();
+		String jdbcUser = dataSource.getUsername();
+		String jdbcPassword = dataSource.getPassword();
+		String jdbcDrivers = dataSource.getDriverClassName();
+		connStrBuilder.append("Provider=").append("mondrian").append(";");
+		connStrBuilder.append("Jdbc=").append(jdbc).append(";");
+		connStrBuilder.append("JdbcUser=").append(jdbcUser).append(";");
+		connStrBuilder.append("JdbcPassword=").append(jdbcPassword).append(";");
+		connStrBuilder.append("JdbcDrivers=").append(jdbcDrivers);
+		return connStrBuilder.toString();
+
+	}
 }
 
 // End FileRepository.java

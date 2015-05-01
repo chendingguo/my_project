@@ -16,16 +16,15 @@
 		<AuthenticationMode>Unauthenticated</AuthenticationMode>
 		<Catalogs>
 			<Catalog name="FoodMart">
-			    
 			    <DataSourceInfo>
-			        foodmart
+			        Provider=mondrian;Jdbc=jdbc:mysql://localhost:3306/foodmart;JdbcUser=root;JdbcPassword=123456;JdbcDrivers=com.mysql.jdbc.Driver
 		        </DataSourceInfo>
 				<Definition>D:/olapworkspace/mondrian-engine/engine_config/FoodMart.xml</Definition>
 			</Catalog>
 			
 			<Catalog name="SteelWheels">
 			    <DataSourceInfo>
-				    steelwheels
+			        Provider=mondrian;Jdbc=jdbc:mysql://localhost:3306/steelwheels;JdbcUser=root;JdbcPassword=123456;JdbcDrivers=com.mysql.jdbc.Driver
 		        </DataSourceInfo>
 				<Definition>D:/olapworkspace/mondrian-engine/engine_config/SteelWheels.xml</Definition>
 			</Catalog>
