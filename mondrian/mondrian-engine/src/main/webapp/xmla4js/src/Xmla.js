@@ -201,7 +201,7 @@ function _ajax(options){
         };
 
     xhr = _createXhr();
-    args = ["POST", "/mondrian-engine/xmla", options.async];
+    args = ["POST", options.url, options.async];
     if (options.username && options.password) {
       args = args.concat([options.username, options.password]);
     }

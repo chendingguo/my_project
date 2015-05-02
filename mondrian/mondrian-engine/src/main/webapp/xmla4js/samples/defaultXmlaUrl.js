@@ -13,4 +13,4 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
-var defaultXmlaUrl = "/mondrian-engine/xmla";
+var defaultXmlaUrl = "http://localhost:8080/mondrian-engine/xmla";
